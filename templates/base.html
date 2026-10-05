@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}{{ config.title }}{% endblock title %}</title>
+<meta name="description" content="{% if page is defined and page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+{% if page is defined and page.draft %}<meta name="robots" content="noindex">{% endif %}
+<style>{{ load_data(path="templates/style.css") | safe }}</style>
+<header>{% block header %}<h1>{{ config.title }}</h1>{% endblock header %}</header>
+<main>
+<article>{% block content %}{% endblock content %}</article>
+<nav aria-label="Posts">
+{% set home = get_section(path="_index.md") %}
+{% if home.pages %}<ul>{% for post in home.pages %}<li><a href="{{ post.path }}"{% if page is defined and page.path == post.path %} aria-current="page"{% endif %}>{{ post.title }}</a>{% if post.draft %} <small>(draft)</small>{% endif %}</li>{% endfor %}</ul>{% else %}<p>No posts yet.</p>{% endif %}
+</nav>
+</main>
+</html>

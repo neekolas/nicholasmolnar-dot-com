@@ -1,0 +1,15 @@
+{
+  "name": "nicholasmolnar-dot-com",
+  "private": true,
+  "scripts": {
+    "setup": "sh scripts/install-zola.sh",
+    "dev": ".bin/zola serve --interface 127.0.0.1 --port 1111 --output-dir .dev --drafts",
+    "build": ".bin/zola build",
+    "check": ".bin/zola check --skip-external-links",
+    "preview": "npm run build && wrangler dev --port 8787",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.142.0"
+  }
+}
